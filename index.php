@@ -69,6 +69,34 @@ $ip_address = get_client_ip();
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <style>
+        .select2-container {
+            width: 100% !important;
+            min-width: 200px;
+        }
+        .select2-container--default .select2-selection--single {
+            height: calc(1.5em + .75rem + 2px);
+            border: 1px solid #ced4da;
+            border-radius: .25rem;
+        }
+        .select2-container--default .select2-selection--single .select2-selection__rendered {
+            color: #212529;
+            line-height: calc(1.5em + .75rem);
+            padding-left: .75rem;
+            text-transform: uppercase;
+        }
+        .select2-container--default .select2-search--dropdown .select2-search__field {
+            color: #212529 !important;
+            background-color: #fff !important;
+            border: 1px solid #ced4da;
+            border-radius: .25rem;
+            padding: 6px 8px;
+            width: 100% !important;
+        }
+        .select2-container--default .select2-search--dropdown .select2-search__field::placeholder {
+            color: #6c757d;
+        }
+    </style>
     <title>BRANCH CHECKING</title>
 </head>
 <body style="background: skyblue; background-image: url('images/logo.jpg');background-repeat: no-repeat;background-size: cover;">
@@ -84,8 +112,9 @@ $ip_address = get_client_ip();
             <?php if(isset($msg)){echo '<p style="color: red;text-align: center">'.$msg.'</p>';}  ?>
             <form method="POST" autocomplete="off" action="<?php echo htmlspecialchars(ycdo_form_action_url('action_login.php'), ENT_QUOTES, 'UTF-8'); ?>">
                 <label>SELECT BRANCH</label>
-                <select id="branch_select" class="form-control" style="min-width: 200px;text-transform: uppercase;" name="branch_id">
+                <select id="branch_select" class="form-control" style="min-width: 200px;" name="branch_id" required>
 <?php 
+echo '<option value=""></option>';
 $branch = "SELECT * FROM branchs WHERE id != '0' AND status = '1' ORDER BY `address` ASC ";
 $run_branch = mysqli_query($con, $branch);
 if (mysqli_num_rows($run_branch) > 0) 
@@ -131,9 +160,41 @@ else
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script>
 $(document).ready(function() {
-    $('#branch_select').select2({
+    var $branchSelect = $('#branch_select');
+
+    $branchSelect.select2({
         placeholder: 'Search branch...',
-        allowClear: true
+        allowClear: true,
+        minimumResultsForSearch: 0,
+        width: '100%'
+    });
+
+    $branchSelect.on('select2:open', function () {
+        var $search = $('.select2-container--open .select2-search__field');
+        $search.attr('placeholder', 'Search branch...');
+        setTimeout(function () {
+            $search.trigger('focus');
+        }, 0);
+    });
+
+    $(document).on('input', '.select2-container--open .select2-search__field', function () {
+        var query = $(this).val();
+        var $rendered = $('.select2-container--open .select2-selection__rendered');
+        $rendered.text(query);
+        $rendered.css('color', '#212529');
+        $rendered.css('text-transform', 'none');
+    });
+
+    $branchSelect.on('select2:close', function () {
+        var selectedText = $branchSelect.find('option:selected').text();
+        var $rendered = $branchSelect.next('.select2-container').find('.select2-selection__rendered');
+        if ($branchSelect.val()) {
+            $rendered.text(selectedText);
+            $rendered.css('text-transform', 'uppercase');
+        } else {
+            $rendered.text('');
+            $rendered.css('text-transform', 'none');
+        }
     });
 });
 </script>
