@@ -71,15 +71,15 @@ $ip_address = get_client_ip();
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <title>BRANCH CHECKING</title>
 </head>
-<body style="background: red;">
-<h1 align="right" style="color: white;">Youth Community Development Organization</h1>
-<p style="color: white;text-align: right;">Serve Humanity</p>
-<h2 align="right" style="color: white;">YCDO Central Hospital</h2>
-<h3 align="right" style="color: white;">UAN : 0304-1110222, Multan</h3>
-    <div style="padding: 30px;margin: 0% 30%;border: 5px solid darkred;background: #ffcccc;border-radius: 120px 10px;">
+<body style="background: skyblue; background-image: url('images/logo.jpg');background-repeat: no-repeat;background-size: cover;">
+<h1 align="right">Youth Community Development Organization</h1>
+<p style="color: maroon;text-align: right;">Serve Humanity</p>
+<h2 align="right" style="color: red;">YCDO Central Hospital</h2>
+<h3 align="right">UAN : 0304-1110222, Multan</h3>
+    <div style="padding: 30px;margin: 0% 30%;border: 5px solid black;background: whitesmoke;border-radius: 120px 10px;">
 
         <div style="">
-            <h1 align="center" style="color: darkred;">WELCOME TO YCDO</h1>
+            <h1 align="center" style="color: skyblue;">WELCOME TO YCDO</h1>
             <h3 align="center">BRANCH VERIFICATION</h3>
             <?php if(isset($msg)){echo '<p style="color: red;text-align: center">'.$msg.'</p>';}  ?>
             <form method="POST" autocomplete="off" action="<?php echo htmlspecialchars(ycdo_form_action_url('action_login.php'), ENT_QUOTES, 'UTF-8'); ?>">
