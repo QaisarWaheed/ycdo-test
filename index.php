@@ -96,6 +96,17 @@ $ip_address = get_client_ip();
         .select2-container--default .select2-search--dropdown .select2-search__field::placeholder {
             color: #6c757d;
         }
+        #branch_select_wrapper .select2-selection {
+            display: none;
+        }
+        #branch_select_wrapper .select2-search--dropdown {
+            display: none;
+        }
+        #branch_search {
+            color: #212529;
+            background-color: #fff;
+            min-width: 200px;
+        }
     </style>
     <title>BRANCH CHECKING</title>
 </head>
@@ -112,6 +123,8 @@ $ip_address = get_client_ip();
             <?php if(isset($msg)){echo '<p style="color: red;text-align: center">'.$msg.'</p>';}  ?>
             <form method="POST" autocomplete="off" action="<?php echo htmlspecialchars(ycdo_form_action_url('action_login.php'), ENT_QUOTES, 'UTF-8'); ?>">
                 <label>SELECT BRANCH</label>
+                <div id="branch_select_wrapper">
+                <input type="text" id="branch_search" class="form-control" placeholder="Type to search branch..." autocomplete="off">
                 <select id="branch_select" class="form-control" style="min-width: 200px;" name="branch_id" required>
 <?php 
 echo '<option value=""></option>';
@@ -129,6 +142,7 @@ else
 }
 ?>
                 </select>
+                </div>
                 <label>SELECT ROLE</label>
                 <select class="form-control" style="min-width: 200px;text-transform: uppercase;" name="role_id">
 <?php 
@@ -161,40 +175,71 @@ else
 <script>
 $(document).ready(function() {
     var $branchSelect = $('#branch_select');
+    var $branchSearch = $('#branch_search');
 
     $branchSelect.select2({
         placeholder: 'Search branch...',
         allowClear: true,
         minimumResultsForSearch: 0,
-        width: '100%'
+        width: '100%',
+        dropdownParent: $('#branch_select_wrapper')
     });
 
-    $branchSelect.on('select2:open', function () {
+    function syncSelect2Search(query) {
         var $search = $('.select2-container--open .select2-search__field');
-        $search.attr('placeholder', 'Search branch...');
+        if ($search.length) {
+            $search.val(query).trigger('input');
+        }
+    }
+
+    function openBranchDropdown() {
+        if (!$branchSelect.data('select2').isOpen()) {
+            $branchSelect.select2('open');
+        }
+    }
+
+    $branchSearch.on('input', function () {
+        var query = $(this).val();
+        openBranchDropdown();
         setTimeout(function () {
-            $search.trigger('focus');
+            syncSelect2Search(query);
         }, 0);
     });
 
-    $(document).on('input', '.select2-container--open .select2-search__field', function () {
-        var query = $(this).val();
-        var $rendered = $('.select2-container--open .select2-selection__rendered');
-        $rendered.text(query);
-        $rendered.css('color', '#212529');
-        $rendered.css('text-transform', 'none');
+    $branchSearch.on('focus click', function () {
+        openBranchDropdown();
+        setTimeout(function () {
+            syncSelect2Search($branchSearch.val());
+            $branchSearch.trigger('focus');
+        }, 0);
+    });
+
+    $branchSelect.on('select2:open', function () {
+        setTimeout(function () {
+            syncSelect2Search($branchSearch.val());
+            $branchSearch.trigger('focus');
+        }, 0);
+    });
+
+    $branchSelect.on('select2:select', function (e) {
+        $branchSearch.val(e.params.data.text);
+    });
+
+    $branchSelect.on('select2:clear', function () {
+        $branchSearch.val('');
     });
 
     $branchSelect.on('select2:close', function () {
-        var selectedText = $branchSelect.find('option:selected').text();
-        var $rendered = $branchSelect.next('.select2-container').find('.select2-selection__rendered');
         if ($branchSelect.val()) {
-            $rendered.text(selectedText);
-            $rendered.css('text-transform', 'uppercase');
-        } else {
-            $rendered.text('');
-            $rendered.css('text-transform', 'none');
+            $branchSearch.val($branchSelect.find('option:selected').text());
         }
+    });
+
+    $('form').on('reset', function () {
+        setTimeout(function () {
+            $branchSearch.val('');
+            $branchSelect.val(null).trigger('change');
+        }, 0);
     });
 });
 </script>
