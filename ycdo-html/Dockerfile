@@ -1,0 +1,9 @@
+FROM php:8.2-apache
+RUN docker-php-ext-install pdo pdo_mysql mysqli
+RUN a2enmod rewrite
+RUN sed -i 's/ServerName.*//' /etc/apache2/apache2.conf || true
+RUN echo 'Timeout 300' >> /etc/apache2/apache2.conf
+RUN echo 'max_execution_time = 300' > /usr/local/etc/php/conf.d/99-report-timeout.ini
+COPY . /var/www/html/
+RUN find /var/www/html -name 'php.ini' -delete || true
+EXPOSE 80
