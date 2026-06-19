@@ -69,45 +69,6 @@ $ip_address = get_client_ip();
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-    <style>
-        .select2-container {
-            width: 100% !important;
-            min-width: 200px;
-        }
-        .select2-container--default .select2-selection--single {
-            height: calc(1.5em + .75rem + 2px);
-            border: 1px solid #ced4da;
-            border-radius: .25rem;
-        }
-        .select2-container--default .select2-selection--single .select2-selection__rendered {
-            color: #212529;
-            line-height: calc(1.5em + .75rem);
-            padding-left: .75rem;
-            text-transform: uppercase;
-        }
-        .select2-container--default .select2-search--dropdown .select2-search__field {
-            color: #212529 !important;
-            background-color: #fff !important;
-            border: 1px solid #ced4da;
-            border-radius: .25rem;
-            padding: 6px 8px;
-            width: 100% !important;
-        }
-        .select2-container--default .select2-search--dropdown .select2-search__field::placeholder {
-            color: #6c757d;
-        }
-        #branch_select_wrapper .select2-selection {
-            display: none;
-        }
-        #branch_select_wrapper .select2-search--dropdown {
-            display: none;
-        }
-        #branch_search {
-            color: #212529;
-            background-color: #fff;
-            min-width: 200px;
-        }
-    </style>
     <title>BRANCH CHECKING</title>
 </head>
 <body style="background: skyblue; background-image: url('images/logo.jpg');background-repeat: no-repeat;background-size: cover;">
@@ -123,9 +84,7 @@ $ip_address = get_client_ip();
             <?php if(isset($msg)){echo '<p style="color: red;text-align: center">'.$msg.'</p>';}  ?>
             <form method="POST" autocomplete="off" action="<?php echo htmlspecialchars(ycdo_form_action_url('action_login.php'), ENT_QUOTES, 'UTF-8'); ?>">
                 <label>SELECT BRANCH</label>
-                <div id="branch_select_wrapper">
-                <input type="text" id="branch_search" class="form-control" placeholder="Type to search branch..." autocomplete="off">
-                <select id="branch_select" class="form-control" style="min-width: 200px;" name="branch_id" required>
+                <select id="branch_select" class="form-control" style="min-width: 200px;text-transform: uppercase;" name="branch_id">
 <?php 
 echo '<option value=""></option>';
 $branch = "SELECT * FROM branchs WHERE id != '0' AND status = '1' ORDER BY `address` ASC ";
@@ -142,7 +101,6 @@ else
 }
 ?>
                 </select>
-                </div>
                 <label>SELECT ROLE</label>
                 <select class="form-control" style="min-width: 200px;text-transform: uppercase;" name="role_id">
 <?php 
@@ -174,72 +132,10 @@ else
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script>
 $(document).ready(function() {
-    var $branchSelect = $('#branch_select');
-    var $branchSearch = $('#branch_search');
-
-    $branchSelect.select2({
-        placeholder: 'Search branch...',
+    $('#branch_select').select2({
+        placeholder: 'Type to search branch...',
         allowClear: true,
-        minimumResultsForSearch: 0,
-        width: '100%',
-        dropdownParent: $('#branch_select_wrapper')
-    });
-
-    function syncSelect2Search(query) {
-        var $search = $('.select2-container--open .select2-search__field');
-        if ($search.length) {
-            $search.val(query).trigger('input');
-        }
-    }
-
-    function openBranchDropdown() {
-        if (!$branchSelect.data('select2').isOpen()) {
-            $branchSelect.select2('open');
-        }
-    }
-
-    $branchSearch.on('input', function () {
-        var query = $(this).val();
-        openBranchDropdown();
-        setTimeout(function () {
-            syncSelect2Search(query);
-        }, 0);
-    });
-
-    $branchSearch.on('focus click', function () {
-        openBranchDropdown();
-        setTimeout(function () {
-            syncSelect2Search($branchSearch.val());
-            $branchSearch.trigger('focus');
-        }, 0);
-    });
-
-    $branchSelect.on('select2:open', function () {
-        setTimeout(function () {
-            syncSelect2Search($branchSearch.val());
-            $branchSearch.trigger('focus');
-        }, 0);
-    });
-
-    $branchSelect.on('select2:select', function (e) {
-        $branchSearch.val(e.params.data.text);
-    });
-
-    $branchSelect.on('select2:clear', function () {
-        $branchSearch.val('');
-    });
-
-    $branchSelect.on('select2:close', function () {
-        if ($branchSelect.val()) {
-            $branchSearch.val($branchSelect.find('option:selected').text());
-        }
-    });
-
-    $('form').on('reset', function () {
-        setTimeout(function () {
-            $branchSearch.val('');
-            $branchSelect.val(null).trigger('change');
-        }, 0);
+        width: '100%'
     });
 });
 </script>
