@@ -68,6 +68,7 @@ $ip_address = get_client_ip();
       </script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <title>BRANCH CHECKING</title>
 </head>
 <body style="background: skyblue; background-image: url('images/logo.jpg');background-repeat: no-repeat;background-size: cover;">
@@ -83,7 +84,7 @@ $ip_address = get_client_ip();
             <?php if(isset($msg)){echo '<p style="color: red;text-align: center">'.$msg.'</p>';}  ?>
             <form method="POST" autocomplete="off" action="<?php echo htmlspecialchars(ycdo_form_action_url('action_login.php'), ENT_QUOTES, 'UTF-8'); ?>">
                 <label>SELECT BRANCH</label>
-                <select class="form-control" style="min-width: 200px;text-transform: uppercase;" name="branch_id">
+                <select id="branch_select" class="form-control" style="min-width: 200px;text-transform: uppercase;" name="branch_id">
 <?php 
 $branch = "SELECT * FROM branchs WHERE id != '0' AND status = '1' ORDER BY `address` ASC ";
 $run_branch = mysqli_query($con, $branch);
@@ -126,5 +127,15 @@ else
         </div>
     </div>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script>
+$(document).ready(function() {
+    $('#branch_select').select2({
+        placeholder: 'Search branch...',
+        allowClear: true
+    });
+});
+</script>
 </body>
 </html>
