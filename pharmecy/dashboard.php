@@ -16,9 +16,10 @@ else
 }
 ?>
 	<title>Dashboard - <?php echo $company_trademark; ?></title>
+	<link rel="stylesheet" type="text/css" href="css/dashboard_info.css">
 </head>
 
-<body class="background_image" oncontextmenu="return false;">
+<body class="reception-dashboard-body" oncontextmenu="return false;">
 <div id="loadingSpinner" style="display: none;">
     <div class = "container">
         <div class = "row p-5 g-5">
@@ -42,31 +43,7 @@ else
 		<?php include 'left_navigation.php'; ?>
 	</div>
 	<div class="col-md-9">
-	<div style="text-align: right;float: right;margin-right: 10px;">
-	<?php
-	if($branch_id == 15)
-	{
-	    echo '
-	    <div style = "text-align: center;">
-    	    <img width = "100%" src= "images/city_police_multan_2.png" alt = "POLICE & YCDO DRUG REHABILITATION HOSPITAL" />
-	    </div>';
-	}
-	else
-	{
-	?>
-		<h2 style="color: white;"><?php echo $company_name; ?></h2>
-		<h6 style="color: brown;"><?php echo $company_ambition; ?></h6>
-		<h3 style="color: red;"><?php echo $branch_name; ?></h3>
-		<h4 style="color: white;"><?php echo $branch_address; ?></h4>
-		<!--<h4 style="color: white;"><?php echo $branch_phone; ?></h4>-->
-	<?php
-	}
-	?>
-		<h4 style="color: white;">UAN : 0304-1110222</h4>
-		<h3 style="margin-top: 250px;text-align: center;">USER: <?php echo htmlspecialchars($user_name); if ($is_incharge == 2) { echo ' Incharge '; } ?>(<?php echo htmlspecialchars($role_title); ?>)</h3>
-		<h3>LAST TOKEN NO: <?php echo last_token_by_user($user_id); ?></h3>
-	</div>
-			
+		<?php include 'includes/dashboard_info_panel.php'; ?>
 	</div>
 </div>
 
