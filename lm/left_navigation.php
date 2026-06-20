@@ -1,7 +1,8 @@
 <?php
 $lab_manager_login_is_admin = (int) ($lab_manager_login_is_admin ?? ($_SESSION['lab_manager_login_is_admin'] ?? 0));
 ?>
-<nav>
+<nav class="ycdo-sidebar">
+	<div class="ycdo-sidebar-header">Navigation</div>
 	<ul id="nav_1">
 		<li>
 			<a style="cursor: pointer;" href='dashboard.php' class="">Dashboard</a>

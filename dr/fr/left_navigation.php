@@ -1,4 +1,5 @@
-<nav>
+<nav class="ycdo-sidebar">
+	<div class="ycdo-sidebar-header">Navigation</div>
 	<ul id="nav_1">
 <?php if($is_admin == 2){ ?>
 		<li>

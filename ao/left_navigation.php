@@ -10,7 +10,8 @@ if(mysqli_num_rows($run_audit) == 1)
     }
 }
 ?>
-<nav>
+<nav class="ycdo-sidebar">
+	<div class="ycdo-sidebar-header">Navigation</div>
 	<ul id="nav_1">
 		<li>
 			<a style="cursor: pointer;" href='dashboard.php' class="">Dashboard</a>

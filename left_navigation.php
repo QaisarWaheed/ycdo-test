@@ -1,4 +1,5 @@
-<nav>
+<nav class="ycdo-sidebar">
+	<div class="ycdo-sidebar-header">Navigation</div>
 	<ul id="nav_1">
 		<!--<li>-->
 		<!--	<a target="_blank" href="patient_registeration.php">Patient Registeration</a>-->

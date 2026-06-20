@@ -1,4 +1,5 @@
-<nav>
+<nav class="ycdo-sidebar">
+	<div class="ycdo-sidebar-header">Navigation</div>
 	<ul id="nav_1">
 		<li>
 			<a style="cursor: pointer;" href='add_bill.php' class="">Testing Add Bill</a>

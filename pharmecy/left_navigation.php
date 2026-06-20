@@ -1,4 +1,5 @@
-<nav>
+<nav class="ycdo-sidebar">
+	<div class="ycdo-sidebar-header">Navigation</div>
 	<ul id="nav_1">
 		<li>
 			<a href="dashboard.php">Home</a>
@@ -124,6 +125,6 @@ if($branch_id != '0')
 		</li>
 
 	</ul>
-	<h5 style="margin-top: 150px;text-align: center;">USER: <?php echo htmlspecialchars($user_name); if ($is_incharge == 2) { echo ' Incharge '; } ?></h5>
+	<h5 class="ycdo-sidebar-user">USER: <?php echo htmlspecialchars($user_name); if ($is_incharge == 2) { echo ' Incharge '; } ?></h5>
 </nav>
 <?php include __DIR__ . '/../includes/nav_active_highlight.php'; ?>

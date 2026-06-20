@@ -1,4 +1,5 @@
-<nav class = "nodisplay_print">
+<nav class="ycdo-sidebar nodisplay_print">
+	<div class="ycdo-sidebar-header">Navigation</div>
 	<ul id="nav_1">
 		<li>
 			<a href="dashboard.php">Home</a>
