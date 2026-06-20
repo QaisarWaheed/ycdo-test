@@ -6,3 +6,4 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" type="text/css" href="css/nav_style.css">
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+	<?php include __DIR__ . '/sidebar_styles.php'; ?>

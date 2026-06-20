@@ -1,4 +1,4 @@
-/* YCDO sidebar — tab-style navigation */
+/* YCDO sidebar — tab-style navigation (load after Bootstrap) */
 .ycdo-sidebar {
   background: #ffffff;
   border: 1px solid #e2e8f0;
@@ -19,64 +19,64 @@
   border-bottom: 1px solid #e2e8f0;
 }
 
-#nav_1 {
+.ycdo-sidebar #nav_1 {
   list-style: none;
   padding: 0;
   margin: 0;
   line-height: normal;
-  text-decoration: none;
 }
 
-#nav_1 > li {
+.ycdo-sidebar #nav_1 > li {
   margin-bottom: 8px;
 }
 
-#nav_1 > li > a,
-#nav_1 a {
+.ycdo-sidebar #nav_1 > li > a,
+.ycdo-sidebar #nav_1 a:not(.dropdown-item) {
   display: block;
   padding: 11px 14px;
   text-decoration: none !important;
   color: #334155 !important;
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
-  border-radius: 10px;
+  background: #f8fafc !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 10px !important;
   font-size: 13px;
   font-weight: 600;
   line-height: 1.35;
   cursor: pointer;
   transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
   box-sizing: border-box;
+  white-space: normal;
 }
 
-#nav_1 > li > a:visited,
-#nav_1 a:visited {
+.ycdo-sidebar #nav_1 > li > a:visited,
+.ycdo-sidebar #nav_1 a:not(.dropdown-item):visited {
   color: #334155 !important;
 }
 
-#nav_1 > li > a:hover,
-#nav_1 a:hover {
+.ycdo-sidebar #nav_1 > li > a:hover,
+.ycdo-sidebar #nav_1 a:not(.dropdown-item):hover {
   color: #0f172a !important;
-  background: #eef2ff;
-  border-color: #c7d2fe;
+  background: #eef2ff !important;
+  border-color: #c7d2fe !important;
   transform: translateX(2px);
 }
 
-#nav_1 li.active > a,
-#nav_1 a.active {
+.ycdo-sidebar #nav_1 li.active > a,
+.ycdo-sidebar #nav_1 a.active:not(.dropdown-item) {
   background: linear-gradient(135deg, #1d4ed8 0%, #2563eb 100%) !important;
   color: #ffffff !important;
   border-color: #1d4ed8 !important;
   box-shadow: 0 4px 12px rgba(37, 99, 235, 0.28);
 }
 
-#nav_1 li.active > a:hover,
-#nav_1 a.active:hover {
+.ycdo-sidebar #nav_1 li.active > a:hover,
+.ycdo-sidebar #nav_1 a.active:not(.dropdown-item):hover {
   color: #ffffff !important;
   background: linear-gradient(135deg, #1e40af 0%, #1d4ed8 100%) !important;
 }
 
-#nav_1 > span.h5,
-#nav_1 > span {
+.ycdo-sidebar #nav_1 > span.h5,
+.ycdo-sidebar #nav_1 > span {
   display: block;
   margin: 18px 4px 10px;
   padding: 8px 12px;
@@ -88,6 +88,35 @@
   background: #e2e8f0 !important;
   border-radius: 8px;
   line-height: 1.4;
+}
+
+.ycdo-sidebar .dropdown {
+  margin-top: 8px;
+}
+
+.ycdo-sidebar .dropdown-menu {
+  position: static !important;
+  float: none;
+  width: 100%;
+  margin-top: 6px;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  box-shadow: none;
+  padding: 6px;
+}
+
+.ycdo-sidebar .dropdown-item {
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #334155 !important;
+  padding: 8px 12px;
+}
+
+.ycdo-sidebar .dropdown-item:hover,
+.ycdo-sidebar .dropdown-item:focus {
+  color: #0f172a !important;
+  background: #eef2ff !important;
 }
 
 .ycdo-sidebar-user {

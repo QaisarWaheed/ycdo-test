@@ -6,8 +6,6 @@
 			<a style="cursor: pointer;" href='dashboard.php' class="">Dashboard</a>
 		</li>
 
-		<a>
-		</a>
 <?php if ($hr_is_admin == 2)
 { ?>
 		<li>
