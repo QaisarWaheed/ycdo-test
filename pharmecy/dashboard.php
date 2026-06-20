@@ -16,7 +16,7 @@ else
 }
 ?>
 	<title>Dashboard - <?php echo $company_trademark; ?></title>
-	<link rel="stylesheet" type="text/css" href="css/dashboard_info.css">
+	<link rel="stylesheet" type="text/css" href="css/dashboard_info.css?v=2">
 </head>
 
 <body class="reception-dashboard-body" oncontextmenu="return false;">

@@ -4,8 +4,9 @@
 
 .reception-info-panel {
   width: 100%;
-  max-width: 620px;
-  margin: 24px auto;
+  max-width: 760px;
+  min-height: 520px;
+  margin: 32px auto;
   background: #ffffff;
   border: 1px solid #dbe3ef;
   border-radius: 14px;
@@ -17,20 +18,21 @@
   background: linear-gradient(135deg, #1d4ed8 0%, #2563eb 100%);
   color: #ffffff;
   text-align: center;
-  padding: 18px 20px;
+  padding: 28px 24px;
 }
 
 .reception-info-panel__header h2 {
-  margin: 0 0 6px;
-  font-size: 1.15rem;
+  margin: 0 0 10px;
+  font-size: 1.45rem;
   font-weight: 700;
   letter-spacing: 0.04em;
   text-transform: uppercase;
+  line-height: 1.35;
 }
 
 .reception-info-panel__header p {
   margin: 0;
-  font-size: 0.85rem;
+  font-size: 1rem;
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -39,29 +41,32 @@
 
 .reception-info-table {
   margin-bottom: 0;
-  font-size: 0.95rem;
+  font-size: 1.08rem;
 }
 
 .reception-info-table th,
 .reception-info-table td {
-  padding: 12px 16px;
+  padding: 22px 24px;
+  min-height: 64px;
   vertical-align: middle;
   border-color: #e8edf4 !important;
+  line-height: 1.5;
 }
 
 .reception-info-table th {
-  width: 38%;
+  width: 34%;
   background: #f8fafc;
   color: #475569;
   font-weight: 700;
   text-transform: uppercase;
-  font-size: 0.78rem;
+  font-size: 0.92rem;
   letter-spacing: 0.05em;
 }
 
 .reception-info-table td {
   color: #0f172a;
   font-weight: 600;
+  font-size: 1.05rem;
 }
 
 .reception-info-table tr:last-child th,
@@ -69,10 +74,13 @@
   border-bottom: none;
 }
 
+.reception-info-table .reception-info-highlight th,
 .reception-info-table .reception-info-highlight td {
   background: #eff6ff;
   color: #1d4ed8;
-  font-size: 1rem;
+  font-size: 1.15rem;
+  padding-top: 26px;
+  padding-bottom: 26px;
 }
 
 .reception-info-branch-image {
