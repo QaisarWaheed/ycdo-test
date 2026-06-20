@@ -70,21 +70,110 @@ $ip_address = get_client_ip();
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <title>BRANCH CHECKING</title>
+    <style>
+        body {
+            background: skyblue url('images/logo.jpg') no-repeat center center;
+            background-size: cover;
+            min-height: 100vh;
+            padding: 24px 32px;
+        }
+        .page-header {
+            text-align: right;
+            margin-bottom: 32px;
+        }
+        .page-header h1,
+        .page-header h2,
+        .page-header h3,
+        .page-header p {
+            margin: 0 0 6px;
+        }
+        .page-header p {
+            color: maroon;
+        }
+        .page-header h2 {
+            color: red;
+        }
+        .verification-card {
+            max-width: 520px;
+            margin: 0 auto;
+            padding: 40px 36px;
+            border: 4px solid #111;
+            background: whitesmoke;
+            border-radius: 24px;
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+        }
+        .verification-card h1 {
+            color: skyblue;
+            text-align: center;
+            margin: 0 0 8px;
+            font-size: 1.75rem;
+        }
+        .verification-card h3 {
+            text-align: center;
+            margin: 0 0 28px;
+            font-size: 1.1rem;
+            letter-spacing: 0.04em;
+        }
+        .verification-form .form-group {
+            margin-bottom: 20px;
+        }
+        .verification-form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            letter-spacing: 0.03em;
+        }
+        .verification-form .select2-container {
+            width: 100% !important;
+        }
+        .verification-form .select2-container--default .select2-selection--single {
+            min-height: 44px;
+            border-radius: 12px;
+            border: 1px solid #ced4da;
+            padding: 6px 12px;
+        }
+        .verification-form .select2-container--default .select2-selection--single .select2-selection__rendered {
+            line-height: 30px;
+            text-transform: uppercase;
+        }
+        .verification-form .select2-container--default .select2-selection--single .select2-selection__arrow {
+            height: 42px;
+        }
+        .verification-form .form-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 28px;
+        }
+        .verification-form .btn {
+            border-radius: 12px;
+            padding: 10px 20px;
+            font-weight: 600;
+            letter-spacing: 0.03em;
+        }
+        .verification-form .alert-msg {
+            color: red;
+            text-align: center;
+            margin-bottom: 16px;
+        }
+    </style>
 </head>
-<body style="background: skyblue; background-image: url('images/logo.jpg');background-repeat: no-repeat;background-size: cover;">
-<h1 align="right">Youth Community Development Organization</h1>
-<p style="color: maroon;text-align: right;">Serve Humanity</p>
-<h2 align="right" style="color: red;">YCDO Central Hospital</h2>
-<h3 align="right">UAN : 0304-1110222, Multan</h3>
-    <div style="padding: 30px;margin: 0% 30%;border: 5px solid black;background: whitesmoke;border-radius: 120px 10px;">
-
-        <div style="">
-            <h1 align="center" style="color: skyblue;">WELCOME TO YCDO</h1>
-            <h3 align="center">BRANCH VERIFICATION</h3>
-            <?php if(isset($msg)){echo '<p style="color: red;text-align: center">'.$msg.'</p>';}  ?>
-            <form method="POST" autocomplete="off" action="<?php echo htmlspecialchars(ycdo_form_action_url('action_login.php'), ENT_QUOTES, 'UTF-8'); ?>">
-                <label>SELECT BRANCH</label>
-                <select id="branch_select" class="form-control" style="min-width: 200px;text-transform: uppercase;" name="branch_id">
+<body>
+<div class="page-header">
+    <h1>Youth Community Development Organization</h1>
+    <p>Serve Humanity</p>
+    <h2>YCDO Central Hospital</h2>
+    <h3>UAN : 0304-1110222, Multan</h3>
+</div>
+    <div class="verification-card">
+            <h1>WELCOME TO YCDO</h1>
+            <h3>BRANCH VERIFICATION</h3>
+            <?php if(isset($msg)){echo '<p class="alert-msg">'.$msg.'</p>';}  ?>
+            <form class="verification-form" method="POST" autocomplete="off" action="<?php echo htmlspecialchars(ycdo_form_action_url('action_login.php'), ENT_QUOTES, 'UTF-8'); ?>">
+                <div class="form-group">
+                <label for="branch_select">SELECT BRANCH</label>
+                <select id="branch_select" class="form-control" name="branch_id">
 <?php 
 echo '<option value=""></option>';
 $branch = "SELECT * FROM branchs WHERE id != '0' AND status = '1' ORDER BY `address` ASC ";
@@ -101,8 +190,10 @@ else
 }
 ?>
                 </select>
-                <label>SELECT ROLE</label>
-                <select id="role_select" class="form-control" style="min-width: 200px;text-transform: uppercase;" name="role_id">
+                </div>
+                <div class="form-group">
+                <label for="role_select">SELECT ROLE</label>
+                <select id="role_select" class="form-control" name="role_id">
 <?php 
 echo '<option value=""></option>';
 $user_role = "SELECT * FROM roles WHERE status = '1' ORDER BY `title` ASC ";
@@ -119,14 +210,15 @@ else
 }
 ?>
                 </select>
+                </div>
 
 <!--                 <label>IP ADDRESS</label>
                 <input class="form-control" type="text" autocomplete="off" required name="ip_address" value="<?php echo $ip_address; ?>" /> -->
-                <br>
-            <input class="btn btn-sm btn-primary" type="submit" name="verify" value="VERIFICATION">
-            <input type="reset" name="reset" class="btn btn-sm btn-warning" value="CLEAR FORM">
+                <div class="form-actions">
+            <input class="btn btn-primary" type="submit" name="verify" value="VERIFICATION">
+            <input type="reset" name="reset" class="btn btn-warning" value="CLEAR FORM">
+                </div>
             </form>
-        </div>
     </div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
