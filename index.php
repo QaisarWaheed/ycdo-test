@@ -102,8 +102,9 @@ else
 ?>
                 </select>
                 <label>SELECT ROLE</label>
-                <select class="form-control" style="min-width: 200px;text-transform: uppercase;" name="role_id">
+                <select id="role_select" class="form-control" style="min-width: 200px;text-transform: uppercase;" name="role_id">
 <?php 
+echo '<option value=""></option>';
 $user_role = "SELECT * FROM roles WHERE status = '1' ORDER BY `title` ASC ";
 $run_user_role = mysqli_query($con, $user_role);
 if (mysqli_num_rows($run_user_role) > 0) 
@@ -134,6 +135,11 @@ else
 $(document).ready(function() {
     $('#branch_select').select2({
         placeholder: 'Type to search branch...',
+        allowClear: true,
+        width: '100%'
+    });
+    $('#role_select').select2({
+        placeholder: 'Type to search role...',
         allowClear: true,
         width: '100%'
     });
