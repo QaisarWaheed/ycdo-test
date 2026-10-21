@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Remove redundant session header() after head.php when connect.php already authenticates."""
+import utils.session
 import os
 import re
 
