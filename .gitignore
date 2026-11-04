@@ -3,5 +3,3 @@
 composer.lock
 node_modules
 config.bat
-.env
-.env.local
